@@ -52,14 +52,14 @@ def define(input_nc, output_nc, ngf, gen_type, norm='instance',
 
     if gen_type == 'unet':
         network = UnetGenerator(input_nc, output_nc, ngf, norm, act)
-        network.cuda(device_id=gpu_ids[1])
+        network.cuda(gpu_ids[0])
     elif gen_type == 'unet-sc':
         network = UnetGeneratorSC(input_nc, output_nc, ngf, norm, act)
-        network.cuda(device_id=gpu_ids[1])
+        network.cuda(gpu_ids[0])
     elif gen_type == 'unet-rec':
-        network = RecursiveUnetGenerator(input_nc, output_nc, 8, ngf, norm, act, use_dropout=False, gpu_ids=gpu_ids)
+        network = RecursiveUnetGenerator(input_nc, output_nc, 8, ngf, norm, act, use_dropout=False, gpu_ids=0)
     elif gen_type == 'resnet':
-        network = ResnetGenerator(input_nc, output_nc, ngf, norm, act, use_dropout=True, n_blocks=block, gpu_ids=gpu_ids)
+        network = ResnetGenerator(input_nc, output_nc, ngf, norm, act, use_dropout=True, n_blocks=block, gpu_ids=0)
     else:
         raise NotImplementedError('Generator model name [{}] is not recognized'.format(gen_type))
 
