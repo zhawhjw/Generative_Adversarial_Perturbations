@@ -2,7 +2,7 @@ import numpy as np
 import torch
 import os
 import torchfcn
-import cityscapes_fcn8s
+
 from .base_model import BaseModel
 from ..utils import image_transform as it
 from ..utils import util
