@@ -1,6 +1,7 @@
 import os
 from . import cityscape
 from . import pascalvoc
+from . import sidewalk
 from torch.utils.data import DataLoader
 
 
@@ -36,4 +37,26 @@ def create_data_loader(args):
                 root, split='seg11valid', transform=1
             ),
             batch_size=1, shuffle=False, **kwargs)
-        return train_loader, val_loader
+
+    elif args.dataset == 'sidewalk':
+
+        root = os.path.expanduser(args.dataroot)
+
+        # dataset_dir = os.path.join(root, 'cityscapes-{}'.format(args.resolution))
+
+        train_set = sidewalk.SidewalkClassSeg(
+            root, split=['train'], transform=1,
+        )
+        test_set = sidewalk.SidewalkClassSeg(
+            root, split=['val'], transform=1,
+        )
+        training_data_loader = DataLoader(
+            dataset=train_set, num_workers=args.nThreads,
+            batch_size=args.batch_size, shuffle=True
+        )
+        testing_data_loader = DataLoader(
+            dataset=test_set, num_workers=args.nThreads,
+            batch_size=args.batch_size, shuffle=False
+        )
+
+    return train_loader, val_loader
