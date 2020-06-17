@@ -39,6 +39,7 @@ def create_data_loader(args):
             ),
             batch_size=1, shuffle=False, **kwargs)
 
+        return train_loader, val_loader
     elif args.dataset == 'sidewalk':
 
         root = os.path.expanduser(args.dataroot)
