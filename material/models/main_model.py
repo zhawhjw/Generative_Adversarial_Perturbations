@@ -225,6 +225,7 @@ class MainSegModel(BaseModel):
         self.real_cpu = it.untransform(self.real_cpu, None, 1, self.dataset)
         self.delta_cpu = it.untransform(self.delta_cpu, None, 1, self.dataset)
         self.fake_cpu = it.untransform(self.fake_cpu, None, 1, self.dataset)
+
         return OrderedDict([
             ('real', it.save_transform(self.real_cpu)),
             ('delta', it.save_transform(self.delta_cpu)),

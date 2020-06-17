@@ -124,6 +124,10 @@ def transform(img, lbl, mode, dataset, optional=-1.0):
             img[0].add(-104.00698793)
             img[1].add(-116.66876762)
             img[2].add(-122.67891434)
+        else:
+            img[0].add(-104.00698793)
+            img[1].add(-116.66876762)
+            img[2].add(-122.67891434)
 
     if lbl is not None:
         return img, lbl
@@ -141,6 +145,10 @@ def untransform(img, lbl, mode, dataset):
             img[1] = img[1].add(-83.21195)
             img[2] = img[2].add(-73.45286)
         elif dataset == 'pascalvoc':
+            img[0].add(104.00698793)
+            img[1].add(116.66876762)
+            img[2].add(122.67891434)
+        else:
             img[0].add(104.00698793)
             img[1].add(116.66876762)
             img[2].add(122.67891434)
@@ -192,6 +200,18 @@ def transform_pred_res(pred, dataset):
         data = torch.FloatTensor(data)
         return data
     elif dataset == 'pascalvoc':
+        h, w = pred.shape
+        data = np.zeros((h, w, 3), dtype=np.float32)
+
+        for i in range(h):
+            for j in range(w):
+                trainId = pred[i][j]
+                data[i][j] = cmap[trainId]
+        data = data.transpose(2, 0, 1)
+        data = torch.FloatTensor(data)
+        return data
+
+    else:
         h, w = pred.shape
         data = np.zeros((h, w, 3), dtype=np.float32)
 
