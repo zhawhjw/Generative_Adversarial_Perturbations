@@ -96,6 +96,13 @@ class BaseOptions():
             default='~/data/models/pytorch/fcn8s_from_caffe.pth',
             help='path of pretrained model based on pascalvoc dataset'
         )
+
+        self.parser.add_argument(
+            '--pretrained_sidewalk', type=str,
+            default='~/data/models/pytorch/fcn8s_from_caffe.pth',
+            help='path of pretrained model based on sidewalk dataset'
+        )
+
         self.parser.add_argument(
             '--metric', type=int,
             default=0, required=True,

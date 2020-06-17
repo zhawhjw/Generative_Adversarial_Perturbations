@@ -84,6 +84,12 @@ class MainSegModel(BaseModel):
             self.pretrained_model = torchfcn.models.FCN8s()
             checkpoint = torch.load(args.pretrained_pascalvoc)
             self.pretrained_model.load_state_dict(checkpoint)
+        else:
+            self.pretrained_model = torchfcn.models.FCN8s()
+            checkpoint = torch.load(args.pretrained_sidewalk)
+            self.pretrained_model.load_state_dict(checkpoint)
+
+
         self.pretrained_model = self.pretrained_model.eval()
         self.pretrained_model.volatile = True
         self.pretrained_model = self.pretrained_model.cuda(self.gpulist[0])
@@ -115,6 +121,8 @@ class MainSegModel(BaseModel):
             if args.dataset == 'pascalvoc':
                 self.eps = args.eps
             elif args.dataset == 'cityscapes':
+                self.eps = args.eps
+            else:
                 self.eps = args.eps
 
         if self.isTarget:
@@ -353,6 +361,8 @@ class MainClfModel(BaseModel):
             if args.dataset == 'pascalvoc':
                 self.eps = args.eps
             elif args.dataset == 'cityscapes':
+                self.eps = args.eps
+            else:
                 self.eps = args.eps
 
         if self.isTarget:

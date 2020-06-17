@@ -24,6 +24,7 @@ def create_data_loader(args):
             batch_size=args.batch_size, shuffle=False
         )
         return training_data_loader, testing_data_loader
+
     elif args.dataset == 'pascalvoc':
         root = os.path.expanduser('~/data/datasets')
         kwargs = {'num_workers': 4, 'pin_memory': True}
@@ -59,4 +60,4 @@ def create_data_loader(args):
             batch_size=args.batch_size, shuffle=False
         )
 
-    return train_loader, val_loader
+        return training_data_loader, testing_data_loader
