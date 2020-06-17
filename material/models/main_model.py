@@ -216,9 +216,9 @@ class MainSegModel(BaseModel):
         self.real_score = self.pretrained_model(self.real_clone)
         self.real_lbl_pred = self.real_score.data.max(1)[1].cpu().numpy()[:, :, :]
 
-        self.real_cpu = self.real_cpu.squeeze_()
-        self.delta_cpu = self.delta.data.cpu().squeeze_()
-        self.fake_cpu = self.fake_cpu.data.squeeze_()
+        self.real_cpu = self.real_cpu.squeeze()
+        self.delta_cpu = self.delta.data.cpu().squeeze()
+        self.fake_cpu = self.fake_cpu.data.squeeze()
         self.lbl_pred_cpu = it.transform_pred_res(self.lbl_pred[0], self.dataset)
         self.lbl_true_cpu = it.transform_pred_res(self.lbl_true[0], self.dataset)
         self.real_lbl_pred_cpu = it.transform_pred_res(self.real_lbl_pred[0], self.dataset)
