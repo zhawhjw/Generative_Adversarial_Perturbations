@@ -172,7 +172,7 @@ def l2_loss(tensor):
 
 
 def l2_norm_adjust(delta, eps):
-    norm = l2_loss(delta).data[0]
+    norm = l2_loss(delta).data.item()
     delta.data *= min(1.0, eps / norm)
     return delta
 

@@ -176,7 +176,7 @@ class MainSegModel(BaseModel):
             for lt, lp in zip(self.lbl_true, self.lbl_pred):
                 self.lbl_trues.append(lt)
                 self.lbl_preds.append(lp)
-            self.losses += self.loss.data[0]
+            self.losses += self.loss.data.item()
 
     def backward(self):
         self.loss.backward()
@@ -194,7 +194,7 @@ class MainSegModel(BaseModel):
                 self.lbl_true, self.lbl_pred, self.n_class
             )[self.metric_type]
             return OrderedDict([
-                ('loss', self.loss.data[0]),
+                ('loss', self.loss.data.item()),
                 ('acc', self.metric.item())
             ])
         else:
@@ -411,7 +411,7 @@ class MainClfModel(BaseModel):
             for lt, lp in zip(self.lbl_true, self.lbl_pred):
                 self.lbl_trues.append(lt)
                 self.lbl_preds.append(lp)
-            self.losses += self.loss.data[0]
+            self.losses += self.loss.data.item()
 
     def backward(self):
         self.loss.backward()
