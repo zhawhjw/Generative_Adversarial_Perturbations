@@ -85,9 +85,15 @@ class MainSegModel(BaseModel):
             checkpoint = torch.load(args.pretrained_pascalvoc)
             self.pretrained_model.load_state_dict(checkpoint)
         else:
-            self.pretrained_model = torchfcn.models.FCN8s()
+            self.pretrained_model = torchfcn.models.FCN8s(n_class=2)
             checkpoint = torch.load(args.pretrained_sidewalk)
-            self.pretrained_model.load_state_dict(checkpoint)
+
+            if 'model_state_dict' in checkpoint:
+                # model.load_state_dict(model_weight['model_state_dict'])
+                self.pretrained_model.load_state_dict(checkpoint['model_state_dict'])
+            else:
+                self.pretrained_model.load_state_dict(checkpoint)
+
 
 
         self.pretrained_model = self.pretrained_model.eval()

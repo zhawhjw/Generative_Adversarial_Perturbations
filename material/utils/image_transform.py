@@ -5,7 +5,7 @@ from . import label
 
 
 full_to_train = {
-    0: 0, 255: 255
+    0: 0, 255: 1
 }
 
 train_to_full = {
